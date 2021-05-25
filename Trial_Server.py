@@ -2,7 +2,7 @@ import socket
 
 s = socket.socket()
 
-s.bind(('0.0.0.0', 8090 )) #Binds IP and port number to newly opened 
+s.bind(('0.0.0.0', 8080 )) #Binds IP and port number to newly opened 
 s.listen(0)
 print("Binded and listening")
 

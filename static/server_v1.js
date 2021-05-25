@@ -7,7 +7,7 @@ let sockets = [];
 server.on('connection', function(socket) {
   sockets.push(socket);
 
-  // When you receive a message, send that message to every socket.
+  // When you receive a message, send that message to every socket(client)
   socket.on('message', function(msg) {
     sockets.forEach(s => s.send(msg));
   });
