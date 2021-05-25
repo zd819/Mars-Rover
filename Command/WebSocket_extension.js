@@ -2,7 +2,7 @@ var connection = new WebSocket('ws://SERVERIP:PORT');
 
 connection.onopen = function () {
     console.log('Connected!');
-    connection.send('Ping'); // Send the message 'Ping' to the server
+    connection.send(Message); // Send the 'message' to the server
 };
 
 // Log errors
