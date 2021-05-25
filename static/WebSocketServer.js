@@ -8,13 +8,13 @@ import java.util.Set;
 
 public class WebsocketServer extends WebSocketServer {
 
-    private static int TCP_PORT = 4444; //Port using to open socket (must be port forward enabled)
+    private static int TCP_PORT = 8080; //Port using to open socket (must be port forward enabled)
 
     private Set<WebSocket> conns; //Websocket object
 
     public WebsocketServer() {
         super(new InetSocketAddress(TCP_PORT)); //Open socket on port designated
-        conns = new HashSet<>();
+        conns = new HashSet<>();//Buffer
     }
 
     @Override//If websocket connection handshake is successful to port, from a Client
