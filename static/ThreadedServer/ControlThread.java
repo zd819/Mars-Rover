@@ -13,11 +13,11 @@ import org.java_websocket.server.WebSocketServer;
 
 public class ControlThread extends WebSocketServer implements Runnable{
 
-
-    private static int Control_Port = 8071; //Port used to open socket (must be port forward enabled)
+    private static int Control_Port = 8080; //Port used to open socket (must be port forward enabled)
 
     public Set<WebSocket> WebCon; //Websocket object
-    public SynchronousQueue<String> Test;
+    public SynchronousQueue<String> CommandQ;
+    public SynchronousQueue<String> ControlQ;
 	    public ControlThread() {
 	        super(new InetSocketAddress(Control_Port)); //Open socket on port designated
 	        WebCon = new HashSet<>();//Buffer
@@ -28,7 +28,8 @@ public class ControlThread extends WebSocketServer implements Runnable{
 
     @Override//If websocket connection handshake is successful to port, from a Client
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        WebCon.add(conn);
+    	System.out.println("Before Control connection verified");
+    	WebCon.add(conn);
         System.out.println("Control has connected with ip :  " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 
@@ -37,14 +38,18 @@ public class ControlThread extends WebSocketServer implements Runnable{
     	if(conn != null) {
     	WebCon.remove(conn);
         System.out.println("Closed connection to Control :  " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
+    	//conn.close();
     	}
     }
     @Override//If a message is recieved from the client, default echo back to client
     public void onMessage(WebSocket conn, String message) {
-        System.out.println("Message from Control: " + message);
+        System.out.println("Message from Control : " + message);
+        Writer(message);//Write to the command thread
         for (WebSocket sock : WebCon) {
+        	System.out.println("Test1");
             sock.send(message);
-            Writer(message);
+            System.out.println("Sent message back to Control Unit");
+            //Writer(message);
         }
     }
 
@@ -53,44 +58,58 @@ public class ControlThread extends WebSocketServer implements Runnable{
         //ex.printStackTrace();
         if (conn != null) {//If there is an error when creating websocket object??
             WebCon.remove(conn);
-            // do some thing if required
+            System.out.println("No error");
         }
         System.out.println("ERROR from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 
-    public void run() {
-    	System.out.println("Runnable run method ran");
-    	Test = Front.getControlQ();
-    	while(true){
+//    public void run() {
+//    	//Not using runnable method run, since the thread will ONLY RUN this method and not
+//    	//continue to run the control class on the thread
+//    }
 
-    	}
-//    		Q call = new Q(methodName, args);
-//    		Front.put(100);
-//    		Object result = call.getResult();
-
-    }
-    public void Writer(String message) {
-
-			try {
-				Test.put(message);
+	public void Listener() {
+    	System.out.println("Listener running");
+    	String message = "0";
+    	while(true) {
+    		System.out.println("Listening to Command Thread");
+	    	try {
+				message = CommandQ.take();
+				System.out.println("Message taken from Command Queue");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    	for (WebSocket sock : WebCon) {
-        	//WebCon.send(message);
-    		if(message !="0") {
-    			System.out.println("From Control Thread : ");
-    			sock.send(message);
-    		}
+	    	for (WebSocket sock : WebCon) {
+	        	//WebCon.send(message);
+	    		if(message !="0") {
+	    			System.out.println("From Command Thread : ");
+	    			sock.send(message);
+	    		}
+	    	}
     	}
+    }
+
+    public void Writer(String message) {
+    	System.out.println("Writer called");
+			try {
+				System.out.println("Trying to put on Command Queue");
+				ControlQ.put(message);
+				System.out.println("Message put on Command Queue");
+			} catch (InterruptedException e) {
+				System.out.println("Unable to put message on Command Queue");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     }
 
 	@Override
 	public void onStart() {
-		System.out.println("Control Connection started");
-
+		System.out.println("Control Thread started");
+		ControlQ = Front.getControlQ();
+		CommandQ = Front.getCommandQ();
+		System.out.println("Retrieved Control Thread");
+		Listener();
 	}
-
 
 }

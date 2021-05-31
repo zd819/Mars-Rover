@@ -13,12 +13,11 @@ import org.java_websocket.server.WebSocketServer;
 
 public class CommandThread extends WebSocketServer implements Runnable{
 
-
-
-    private static int Command_Port = 8076; //Port used to open socket (must be port forward enabled)
+    private static int Command_Port = 8085; //Port used to open socket (must be port forward enabled)
 
     private Set<WebSocket> WebCom; //Websocket object
-	public SynchronousQueue<String> Test;
+    public SynchronousQueue<String> CommandQ;
+    public SynchronousQueue<String> ControlQ;
     	public CommandThread() {
 	        super(new InetSocketAddress(Command_Port)); //Open socket on port designated
 	        WebCom = new HashSet<>();//Buffer
@@ -27,6 +26,7 @@ public class CommandThread extends WebSocketServer implements Runnable{
 
     @Override//If websocket connection handshake is successful to port, from a Client
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
+    	System.out.println("Before Command connection verified");
         WebCom.add(conn);
         System.out.println("Command has connected with ip :  " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
@@ -41,6 +41,7 @@ public class CommandThread extends WebSocketServer implements Runnable{
     @Override//If a message is recieved from the client, default echo back to client
     public void onMessage(WebSocket conn, String message) {
         System.out.println("Message from Command: " + message);
+        Writer(message);
         for (WebSocket sock : WebCom) {
         	//WebCon.send(message);
             sock.send(message);
@@ -58,42 +59,52 @@ public class CommandThread extends WebSocketServer implements Runnable{
         System.out.println("ERROR from " + conn.getRemoteSocketAddress().getAddress().getHostAddress());
     }
 
-    public void run() {
-    	System.out.println("Runnable run method ran");
-    	Test = Front.getControlQ();
-    	while(true){
-    		Listener();
-    	}
-//    		Q call = new Q(methodName, args);
-//    		Front.put(100);
-//    		Object result = call.getResult();
-
-    }
-
      //Try to read from Synchronous queue
 	 //If no value in synchronous queue then
 	 //Value not needed to be piped through to command
 	 //Yet and so we throw an exception and do nothing
     public void Listener() {
+    	System.out.println("Listener running");
     	String message = "0";
-    	try {
-			message = Test.take();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	for (WebSocket sock : WebCom) {
-        	//WebCon.send(message);
-    		if(message !="0") {
-    			System.out.println("From Control Thread : ");
-    			sock.send(message);
-    		}
+    	while(true) {
+    		System.out.println("Listening to Control Thread");
+	    	try {
+				message = ControlQ.take();
+				System.out.println("Message taken from Control Queue");
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	for (WebSocket sock : WebCom) {
+	        	//WebCon.send(message);
+	    		if(message !="0") {
+	    			System.out.println("From Control Thread : ");
+	    			sock.send(message);
+	    		}
+	    	}
     	}
     }
+
+    public void Writer(String message) {
+    	System.out.println("Writer called");
+			try {
+				System.out.println("Trying to put on Control Queue");
+				CommandQ.put(message);
+				System.out.println("Message put on Control Queue");
+			} catch (InterruptedException e) {
+				System.out.println("Unable to put message on Control Queue");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    }
+
 	@Override
 	public void onStart() {
-		System.out.println("Command Connection started");
-//		/Transmission();
+		System.out.println("Command Thread started");
+		ControlQ = Front.getControlQ();
+		CommandQ = Front.getCommandQ();
+		System.out.println("Retrieved Control Thread");
+		Listener();
 	}
 
 
