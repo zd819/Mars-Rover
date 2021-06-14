@@ -1,0 +1,589 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+body {
+    background: #F2F2F2;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    background: #000200;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+}
+
+.container .star {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    -webkit-animation: animate 8s ease-in-out infinite,
+               backgroundmove 8s linear infinite;
+            animation: animate 8s ease-in-out infinite,
+               backgroundmove 8s linear infinite;
+}
+
+.container .star.star1 {
+    -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+    background: url(/frontend/images/star1.png);
+}
+
+.container .star.star2 {
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s;
+    background: url(/frontend/images/star2.png);
+}
+
+.container .star.star3 {
+    -webkit-animation-delay: -2s;
+            animation-delay: -2s;
+    background: url(/frontend/images/star3.png);
+}
+
+.container .star.star4 {
+    -webkit-animation-delay: -3s;
+            animation-delay: -3s;
+    background: url(/frontend/images/star4.png);
+}
+
+.container .star.star5 {
+    -webkit-animation-delay: -4s;
+            animation-delay: -4s;
+    background: url(/frontend/images/star5.png);
+}
+
+.container .star.star6 {
+    -webkit-animation-delay: -5s;
+            animation-delay: -5s;
+    background: url(/frontend/images/star6.png);
+}
+
+.container .star.star7 {
+    -webkit-animation-delay: -6s;
+            animation-delay: -6s;
+    background: url(/frontend/images/star7.png);
+}
+
+.container .star.star8 {
+    -webkit-animation-delay: -7s;
+            animation-delay: -7s;
+    background: url(/frontend/images/star8.png);
+}
+
+@-webkit-keyframes animate {
+    0%,20%,40%,60%,80%,100%
+    {
+        opacity: 0;
+    }
+    10%,30%,50%,70%,90%
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes animate {
+    0%,20%,40%,60%,80%,100%
+    {
+        opacity: 0;
+    }
+    10%,30%,50%,70%,90%
+    {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes backgroundmove {
+    0%
+    {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+    100%
+    {
+        -webkit-transform: scale(2);
+                transform: scale(2);
+    }
+}
+
+@keyframes backgroundmove {
+    0%
+    {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+    100%
+    {
+        -webkit-transform: scale(2);
+                transform: scale(2);
+    }
+}
+
+.container .bgimg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+#bgimg1 {
+    left: 5%;
+    top: 15%;
+}
+
+#bgimg2 {
+    right: 45%;
+    top: 20%;
+    height: 60%;
+    width: 60%;
+}
+
+#bgimg3 {
+    left: 10%;
+    top: 0%;
+}
+
+#bgimg4 {
+    right: 23%;
+    top: 10%;
+}
+
+nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 2% 3%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+svg {
+    width: clamp(50px, 5vw, 130px);
+}
+
+.logo {
+    z-index: 10;
+}
+
+.utilIconMap {
+    display: none;
+}
+
+.fa {
+    display: none;
+}
+
+.camera {
+    position: absolute;
+    background: black;
+    width: 640px;
+    height: 420px;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    -webkit-box-shadow: black;
+            box-shadow: black;
+    border: 5px solid rgb(65, 64, 64);
+    border-radius: 10px;
+}
+
+.map {
+    position: absolute;
+    display: block;
+    background: url(/frontend/images/marsMapBg.jpg)no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    bottom: 0px;
+    -webkit-box-shadow: black;
+            box-shadow: black;
+    z-index: 800;
+    border-radius: 10px;
+    border: 5px solid #636365;
+}
+
+.closeMap {
+    display: none;
+}
+
+.container-wheel {
+    position: absolute;
+    background-image: -o-radial-gradient(rgb(73, 73, 73), black);
+    background-image: radial-gradient(rgb(73, 73, 73), black);
+    height: 180px;
+    width: 100vw;
+    bottom: 0px;
+}
+
+.container-wheel #cockpit {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 62%;
+}
+
+.gears {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    left: 27%;
+    bottom: 27%;
+}
+
+#forwards3 {
+    min-width: 100px;
+    z-index: 100;
+}
+
+#forwards2 {
+    min-width: 100px;
+    z-index: 100;
+}
+
+#forwards {
+    min-width: 100px;
+    z-index: 100;
+}
+
+#backwards {
+    min-width: 100px;
+    z-index: 100;
+}
+
+#stopRover {
+    min-width: 100px;
+    z-index: 100;
+}
+
+.openUtil {
+    display: none;
+}
+
+#CoordInput {
+    position: absolute;
+    left: 70%;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+#sendButton {
+    position: absolute;
+    left: 70%;
+    top: 60%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.wheel {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    left: 50%;
+    bottom: 34%;
+    -webkit-transform: translate(-50%);
+        -ms-transform: translate(-50%);
+            transform: translate(-50%);
+}
+
+.container-wheel .wheel img {
+    position: absolute;
+    height: 180px;
+    width: 180px;
+}
+
+.utilities {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    background: none;
+    width: 300px;
+    height: 300px;
+    bottom: 5%;
+    right: 0;
+    z-index: 1000;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.utilities .openUtil {
+    display: none;
+}
+
+.battery {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    top: 75%;
+    -webkit-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+}
+
+.battery::before {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 7px;
+    background-color: black;
+    top: 50%;
+    right: -11px;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.level {
+    height: 50px;
+    background: #00b26a;
+    border-radius: 10px;
+    /*transition: all 0.5s;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.level #text {
+    color: white;
+    font-size: 10px;
+    font-family: sans-serif;
+}
+
+#charge {
+    color: white;
+    font-size: 10px;
+    font-family: sans-serif;
+    position: absolute;
+    top: 103%;
+}
+
+/*
+.level.charging {
+    animation: charging 3s linear infinite;
+}
+
+@keyframes charging {
+    0%{width: 0%;}
+    100%{width: 100%;}
+}
+*/
+
+@media(max-width: 700px){
+    .container-wheel {
+        background: rgb(44, 34, 88);
+        z-index: 100;
+        height: 100px;
+    }
+
+    #cockpit {
+        display: none;
+    }
+
+    .container {
+        height: 100vh;
+        width: 100%;
+    }
+    nav {
+        z-index: 1000;
+    }
+
+    nav a {
+        z-index: 1000;
+    }
+
+    nav a svg {
+        z-index: 1000;
+    }
+
+    .mapUtil {
+        position: absolute;
+        height: 300px;
+        width: 300px;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+    }
+
+    .closeMap {
+        display: block;
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        top: 0;
+        right: 0;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    .closeMap img {
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        z-index: 1000;
+    }
+
+    .fa {
+        display: block;
+        color: white;
+    }
+
+    .utilIconMap {
+        display: block;
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    .camera {
+        height: 100vh;
+        width: 100%;
+        z-index: 10;
+        background: yellow;
+    }
+
+    .mapUtil {
+        z-index: 10;
+    }
+
+    .utilities {
+        background: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 50px;
+        width: 120px;
+        -webkit-transition: top 1s ease;
+        -o-transition: top 1s ease;
+        transition: top 1s ease;
+    }
+
+    .openUtil {
+        display: block;
+        width: 100px;
+        height: 50px;
+        color: white;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        z-index: 1000;
+    }
+
+    .openUtil img {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        height: 50px;
+        width: 50px;
+        z-index: 1000;
+    }
+
+    .utilIcon {
+        display: block;
+    }
+
+    .utilities .battery {
+        position: absolute;
+        top: 5px;
+        -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+
+    #charge {
+        top: 120%;
+        color: #000;
+    }
+
+    .container-wheel .buttons {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    .wheel {
+        display: none;
+    }
+
+    .buttons {
+        display: none;
+    }
+
+    #CoordInput {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+    }
+
+    #sendButton {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+    }
+}

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive</title>
+    <link rel="stylesheet" href="drive_style.css">
+</head>
+<body>
+    <section class="container">
+        <div class="star star1"></div>
+        <div class="star star2"></div>
+        <div class="star star3"></div>
+        <div class="star star4"></div>
+        <div class="star star5"></div>
+        <div class="star star6"></div>
+        <div class="star star7"></div>
+        <div class="star star8"></div>
+        <img class="bgimg" id="bgimg1" src="/frontend/images/MovinBackground/2.png" data-value="-3" alt="">
+        <img class="bgimg" id="bgimg2" src="/frontend/images/MovinBackground/9.png" data-value="10" alt="">
+        <img class="bgimg" id="bgimg3" src="/frontend/images/MovinBackground/4.png" data-value="6" alt="">
+        <img class="bgimg" id="bgimg4" src="/frontend/images/MovinBackground/7.png" data-value="-8" alt="">
+
+        <div class="mapUtil">
+            <canvas class="map" id="canvas"></canvas>
+            <div class="closeMap"><img class="closeImg" src="/frontend/images/cancel.png" alt=""></div>
+        </div>
+
+        <div class="camera"></div>
+
+        <nav>
+            <a class="logo" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#9aa9ff" d="M100.967 207.589v48.455h94.068l-42.381-83.831z"/><path d="M329.936 10H221.937c-11.046 0-20 8.954-20 20v63.999c0 11.046 8.954 20 20 20h107.999c11.046 0 20-8.954 20-20V30c0-11.046-8.954-20-20-20z" fill="#c8d0ff"/><circle cx="275.938" cy="62" r="24" fill="#8396ff"/><path fill="#c8d0ff" d="M255.938 113.999h40v142.049h-40z"/><circle cx="73.999" cy="437.997" r="63.999" fill="#9aa9ff"/><circle cx="73.999" cy="437.997" r="24" fill="#fff"/><circle cx="255.998" cy="437.997" r="63.999" fill="#9aa9ff"/><circle cx="255.998" cy="437.997" r="24" fill="#fff"/><circle cx="437.997" cy="437.997" r="63.999" fill="#9aa9ff"/><circle cx="437.997" cy="437.997" r="24" fill="#fff"/><path fill="#eceeff" d="M64 256.048h383.997v117.959H64z"/><path d="M10.002 183.109c36.806 36.806 96.48 36.806 133.286 0s36.806-96.48 0-133.286L10.002 183.109z" fill="#dde2ff"/><path d="M256 472c18.748 0 34-15.252 34-34s-15.252-34-34-34-34 15.252-34 34 15.252 34 34 34zm0-47.999c7.72 0 14 6.28 14 14s-6.28 14-14 14-14-6.28-14-14 6.28-14 14-14zM74.001 472c18.748 0 34-15.252 34-34s-15.252-34-34-34-34 15.252-34 34 15.253 34 34 34zm0-47.999c7.72 0 14 6.28 14 14s-6.28 14-14 14-14-6.28-14-14 6.281-14 14-14zM403.999 438.001c0 18.748 15.252 34 34 34s34-15.252 34-34-15.252-34-34-34-34 15.252-34 34zm48 0c0 7.72-6.28 14-14 14s-14-6.28-14-14 6.28-14 14-14 14 6.28 14 14zM106.001 288.998c-5.523 0-10 4.477-10 10v32.131c0 5.523 4.477 10 10 10s10-4.477 10-10v-32.131c0-5.523-4.477-10-10-10zM148.001 288.998c-5.523 0-10 4.477-10 10v32.131c0 5.523 4.477 10 10 10s10-4.477 10-10v-32.131c0-5.523-4.477-10-10-10zM190.001 288.998c-5.523 0-10 4.477-10 10v32.131c0 5.523 4.477 10 10 10s10-4.477 10-10v-32.131c-.001-5.523-4.478-10-10-10zM309.937 62c0-18.748-15.252-34-34-34s-34 15.252-34 34 15.252 34 34 34 34-15.253 34-34zm-48 0c0-7.72 6.28-14 14-14s14 6.28 14 14-6.28 14-14 14-14-6.281-14-14zM295.94 173.669c-2.63 0-5.21 1.06-7.07 2.93a10.076 10.076 0 00-2.93 7.07c0 2.63 1.06 5.2 2.93 7.07 1.86 1.86 4.44 2.93 7.07 2.93s5.21-1.07 7.07-2.93c1.86-1.86 2.93-4.44 2.93-7.07 0-2.64-1.07-5.21-2.93-7.07a10.033 10.033 0 00-7.07-2.93z"/><path d="M448.841 106.929l8.481 15.06a10.001 10.001 0 008.713 5.093h35.963c5.523 0 10-4.477 10-10s-4.477-10-10-10H471.88l-9.316-16.542 9.316-16.541h30.119c5.523 0 10-4.477 10-10s-4.477-10-10-10h-35.963a10 10 0 00-8.713 5.093l-14.276 25.347-51.521 51.521a10.001 10.001 0 00-2.929 7.071v103.013h-82.66v-26.046c0-5.523-4.477-10-10-10s-10 4.477-10 10v26.046h-20V123.999h20v25.333c0 5.523 4.477 10 10 10s10-4.477 10-10v-25.333h24c16.542 0 30-13.458 30-30V30c0-16.542-13.458-30-30-30h-108c-16.542 0-30 13.458-30 30v63.999c0 16.542 13.458 30 30 30h24v122.045h-44.754l-36.936-73.061c26.051-40.363 21.427-94.916-13.888-130.232-3.905-3.905-10.238-3.905-14.142 0L103.96 75.008H45.188c-5.523 0-10 4.477-10 10v58.772L2.931 176.038c-3.905 3.905-3.905 10.237 0 14.142 19.69 19.69 45.869 30.534 73.714 30.534 4.833 0 9.615-.334 14.323-.977v26.309H64.002c-5.523 0-10 4.477-10 10V366.77c-31.115 8.749-54 37.358-54 71.23 0 40.804 33.196 74 73.999 74S148 478.804 148 438.001c0-21.285-9.046-40.487-23.48-54h80.959c-14.434 13.513-23.48 32.715-23.48 54C182.001 478.804 215.196 512 256 512s73.999-33.196 73.999-73.999c0-21.285-9.046-40.487-23.48-54h80.959c-14.434 13.513-23.48 32.715-23.48 54 0 40.804 33.196 73.999 73.999 73.999s73.999-33.196 73.999-73.999c0-33.873-22.885-62.482-54-71.23V256.044c0-5.523-4.477-10-10-10h-39.402v-98.871l40.247-40.244zm-236.904-12.93V30c0-5.514 4.486-10 10-10h107.999c5.514 0 10 4.486 10 10v63.999c0 5.514-4.486 10-10 10H221.937c-5.514 0-10-4.486-10-10zM55.188 95.008H83.96L55.188 123.78V95.008zm-30.631 87.688L142.871 64.382c26.021 33.035 23.803 81.199-6.654 111.655-15.913 15.913-37.069 24.676-59.573 24.676-19.134 0-37.296-6.337-52.087-18.017zm86.41 32.254c14.659-5.096 28.095-13.474 39.393-24.771l.113-.116 28.301 55.981h-67.806l-.001-31.094zm17.034 223.051c0 29.776-24.224 54-54 54s-54-24.224-54-54 24.224-54 54-54 54 24.224 54 54zm181.999 0c0 29.776-24.224 54-54 54s-54-24.224-54-54 24.224-54 54-54 54 24.224 54 54zm181.998 0c0 29.776-24.224 54-54 54s-54-24.224-54-54 24.224-54 54-54 54 24.224 54 54zm-53.999-74H74.001v-97.957h363.997v97.957z"/><path d="M295.937 288.998c-5.523 0-10 4.477-10 10s4.477 10 10 10h100.395c5.523 0 10-4.477 10-10s-4.477-10-10-10H295.937zM255.94 288.998c-2.64 0-5.21 1.07-7.07 2.93-1.87 1.86-2.93 4.44-2.93 7.07s1.06 5.21 2.93 7.07c1.86 1.86 4.43 2.93 7.07 2.93 2.63 0 5.21-1.07 7.07-2.93 1.86-1.86 2.93-4.44 2.93-7.07s-1.07-5.21-2.93-7.07a10.076 10.076 0 00-7.07-2.93z"/></svg></a>
+        </nav>
+
+        <div class="container-wheel">
+            <img id="cockpit" src="/frontend/images/cockpit.png" alt="cockpit">
+            <div class="wheel">
+                <img id="rotate" src="/frontend/images/wheel.png" alt="Steering wheel">
+            </div>
+            <div class="gears">
+                <button class="buttons" id="forwards3" onclick="moveUp3()">3rd Gear</button>
+                <button class="buttons" id="forwards2" onclick="moveUp2()">2nd Gear</button>
+                <button class="buttons" id="forwards" onclick="moveUp()">1st Gear</button>
+                <button class="buttons" id="backwards" onclick="moveDown()">back</button>
+                <button class="buttons" id="stopRover" onclick="stopRover()">Stop</button>
+            </div>
+            <input id="CoordInput" type="text" onfocus="this.value=''" placeholder="Enter coordinates">
+            <button id="sendButton" onclick="ClearFields()">Send</button>
+            <img class="utilIconMap" src="/frontend/images/—Pngtree—weight icon_4469436.png" alt="util icon">
+        </div>
+
+        <div class="openUtil">
+            <img class="utilIcon" src="/frontend/images/—Pngtree—weight icon_4469436.png" alt="util icon">
+        </div>
+
+        <div class="utilities">
+            <div class="battery">
+                <div class="level" id="percentage">
+                    <div id="text"></div>
+                </div>
+            </div>
+            <p id="charge">Remaining Charge: 0m</p>
+        </div>
+    </section>
+    <!--
+    <script>
+        const ws = new WebSocket("ws://localhost:8080");
+
+        ws.addEventListener("open", () => {
+            console.log("We are connected!");
+
+            ws.send("Waddup?");
+        });
+    </script> -->
+
+    <script>
+    //<---------CODE FOR MAP--------->
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = 300;
+    canvas.height = 300;
+    //<---------CODE FOR MAP--------->
+    
+    var connection = new WebSocket('ws://82.137.86.96:8075');
+    var speed= 'no speed';
+    var coord = 1;
+    var batteryLife;
+    var chargeCapacity;
+    var positions;
+    var arr;
+    var RoverCoords = [0, 0];
+    var oldAngle = 0;
+
+    //<------CODE FOR CONTROLING THE ROVER MANUALLY ------>
+        const up = document.getElementsByClassName("buttons");
+    let movement = 0;
+
+    document.addEventListener('keyup', function(e) {
+
+        // if(e.keyCode === 40) {
+        //     speed = -1;
+        //     e.preventDefault();
+        //     document.getElementById('backwards').click();
+        // }
+
+        // if(e.keyCode === 38) {
+        //     speed = 1;
+        //     e.preventDefault();
+        //     document.getElementById('forwards').click();
+        // }
+
+        // if(e.keyCode === 50) {
+        //     speed = 2;
+        //     e.preventDefault();
+        //     document.getElementById('forwards2').click();
+        // }
+
+        // if(e.keyCode === 51) {
+        //     speed = 3;
+        //     e.preventDefault();
+        //     document.getElementById('forwards3').click();
+        // }
+    });
+
+    const img = document.querySelector('#rotate');
+    var offset = 0;
+
+    //if a button is pressed this function is called
+    document.addEventListener('keydown', function(e) {
+        //checks if the pressed key is <-
+        if(e.keyCode === 39) {
+            offset += 3;
+            if(offset === 360) {
+                offset = 0;
+            }
+    //checks if the pressed key is ->
+        } else if (e.keyCode === 37){
+            offset -= 3;
+            if(offset === -360) {
+                offset = 0;
+            }
+        }
+    rotate(img, offset);
+    });
+
+    function rotate(el, degrees) {
+        // Code for Safari
+        el.style.WebkitTransform = `rotate(${degrees}deg)`;
+        // Code for IE9
+        el.style.msTransform = `rotate(${degrees}deg)`;
+        // Standard syntax
+        el.style.transform = `rotate(${degrees}deg)`;
+    }
+    //---------------------------------------------------------
+    function stopRover() {
+        speed ='h';
+        console.log('0');
+    }
+
+    function moveUp() {
+        speed = 'f';
+        console.log('1');
+    }
+
+    function moveUp2() {
+        speed = 's';
+        console.log('2');
+    }
+
+    function moveUp3() {
+        speed = 't';
+        console.log('3');
+    }
+
+    function moveDown() {
+        speed = 'r';
+        console.log('-1');
+    }    
+    //<------CODE FOR CONTROLING THE ROVER MANUALLY ------>
+
+    //<------CODE FOR SENDING COORDS FROM INPUT FIELD------>
+        function ClearFields() {
+        coord = CoordInput.value;
+        console.log('/,' + speed + ',' + offset + ',' + coord + ',/');
+        connection.send('/,' + speed + ',' + offset + ',' + coord + ',/');
+        document.getElementById("CoordInput").value = '';
+    }
+    //<------CODE FOR SENDING COORDS FROM INPUT FIELD------>
+
+    connection.onopen = function () {
+    console.log('Connected!');
+    connection.send(coord); // Send the 'message' to the server
+    };
+
+
+
+    // Log errors
+    connection.onerror = function (error) {
+    console.log('WebSocket Error ' + error);
+    };
+
+
+
+    // Log messages from the server
+    // /s,bat,range,x,y,ang,x_obst,y_obst,obst_color,/s
+    connection.onmessage = function (e) {
+        positions = e.data;
+        console.log(positions);
+        //splitting the message into an array
+        arr = positions.split(",");
+        var length = arr.length;
+
+        //checking if the message is corrupted
+        if(arr[0] == "/" && arr[length - 1] == "/")
+        {
+            //converting the elements of the array to integers
+            arr = arr.map(x=>+x);
+
+            //<---------Code for the handeling the battery and charge---------->
+            batteryLife = arr[1];
+            chargeCapacity = arr[2];
+            var foo = setInterval(function () {
+                document.getElementById('percentage').style.width = batteryLife + 'px';
+                document.getElementById('text').innerHTML = `${batteryLife}%`;
+                document.getElementById('charge').innerHTML = `Remaining charge:${chargeCapacity}m`;
+            }, 1000);
+            //<---------Code for the handeling the battery and charge---------->
+
+            //<---------Code for the drawing of the map---------->
+                //console.log(arr[3]);
+                //console.log(arr[4]);
+                //console.log(RoverCoords[0]);
+                //console.log(RoverCoords[1]);
+            if(arr[3] != RoverCoords[0] || arr[4] != RoverCoords[1] || oldAngle != arr[5]) {
+                //delete the old position of the rover
+                ctx.save();
+                ctx.translate((RoverCoords[0] + 145 + 5), (-RoverCoords[1] + 145 + 5));
+                ctx.rotate(oldAngle * Math.PI / 180);
+                ctx.translate(-(RoverCoords[0] + 145 + 5), -(-RoverCoords[1] + 145 + 5));
+                ctx.clearRect((RoverCoords[0] + 144), (-RoverCoords[1] + 144), 15, 15);
+                ctx.restore();
+                ctx.clearRect(0, 0, 90, 90);
+                //set the new position of the rover
+                RoverCoords[0] = arr[3];
+                RoverCoords[1] = arr[4];
+            }
+
+            //draw the position of the rover
+            oldAngle = arr[5];
+            ctx.fillStyle = 'red';
+            ctx.save();
+            ctx.translate((RoverCoords[0] + 145 + 5), (-RoverCoords[1] + 145 + 5));
+            ctx.rotate(arr[5] * Math.PI / 180);
+            ctx.translate(-(RoverCoords[0] + 145 + 5), -(-RoverCoords[1] + 145 + 5));
+            //ctx.arc((RoverCoords[0] + 145 + 5), (-RoverCoords[1] + 145 + 5), 10, 0, Math.PI, true);
+            //ctx.fillText(text, y , y [, maxWidth])
+            ctx.fillRect((RoverCoords[0] + 145), (-RoverCoords[1] + 145), 10, 10);
+            ctx.restore();
+            ctx.fillRect(2, 2 , 10, 10);
+            ctx.font = '16px serif';
+            ctx.fillStyle = 'white';
+            ctx.fillText(': ' + RoverCoords[0] + ' , ' + RoverCoords[1], 20, 11, 60);
+
+
+            //draw all of the objects seen
+            for(var i = 6; i < arr.length - 1; i = i + 3) {
+                if(!(arr[i] == 0 && arr[i+1] == 0))
+                {
+                    ctx.beginPath();
+                    ctx.arc(((arr[i]) + 145), (-(arr[i + 1]) + 145), 5, 0, 2*Math.PI, true);
+                    if(arr[i + 2] == 1) {
+                        ctx.fillStyle = 'red';
+                    }else if(arr[i + 2] == 4) {
+                        ctx.fillStyle = 'yellow';
+                    }else if(arr[i + 2] == 7) {
+                        ctx.fillStyle = 'blue';
+                    }else if(arr[i + 2] == 10) {
+                        ctx.fillStyle = 'pink';
+                    }else if(arr[i + 2] == 13) {
+                        ctx.fillStyle = 'teal';
+                    }
+                    ctx.fill();
+                    //console.log(arr[i]);
+                    //console.log(arr[i+1]);
+                }
+            }
+            //<---------Code for the drawing of the map---------->
+        }
+    };
+    </script>
+
+    <script>
+        const utilities = document.querySelector('.utilities');
+        const utilIcon = document.querySelector('.utilIcon');
+        const utilIconMap = document.querySelector('.utilIconMap');
+        const mapUtil = document.querySelector('.mapUtil');
+        const closeImg = document.querySelector('.closeImg');
+
+        utilIconMap.addEventListener('click', showMap);
+        utilities.addEventListener('click', close);
+        utilIcon.addEventListener('click', open);
+        closeImg.addEventListener('click', hideMap);
+
+        function close() {
+            utilities.style.top = '-100%';
+            utilIcon.style.display = 'block';
+        }
+
+        function open() {
+            utilities.style.top = '5px';
+            utilIcon.style.display = 'none';
+        }
+
+        function showMap() {
+            mapUtil.style.zIndex = '100';
+        }
+
+        function hideMap() {
+            mapUtil.style.zIndex = '10';
+        }
+    </script>
+
+    <script type="text/javascript">
+    //<---------CODE FOR Parallax background--------->
+    document.addEventListener('mousemove', parallax);
+    function parallax(e){
+        document.querySelectorAll('.bgimg').forEach(function(move){
+            var movingValue = move.getAttribute("data-value");
+            var x = (e.clientX * movingValue) / 250;
+            var y = (e.clientY * movingValue) / 250;
+
+            move.style.transform = "translateX(" + x + "px) translateY(" + y + "px)";
+        });
+    }
+    //<---------CODE FOR Parallax background--------->
+    </script>
+</body>
+</html>
